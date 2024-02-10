@@ -10,7 +10,7 @@ class ChallanTablePage extends StatefulWidget {
 }
 
 class _ChallanTablePageState extends State<ChallanTablePage> {
-  List<String> imageList = ['image1.png', 'image2.png']; // Replace with your image paths
+  List<String> imageList = ['myimg1.png', 'myimg2.png']; // Replace with your image paths
   List<TextEditingController> textControllers = [];
 
   @override
@@ -41,10 +41,10 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
               TableRow(
                 children: [
                   TableCell(child: Image.asset('assets/images/${imageList[i]}',
-                              width: 10,
-                              height: 10,
+                              width: 100,
+                              height: 100,
                        )),
-                  TableCell(child: TextFormField(controller: textControllers[i])),
+                  TableCell(child: TextFormField(controller: textControllers[i], textAlign: TextAlign.center,)),
                   TableCell(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

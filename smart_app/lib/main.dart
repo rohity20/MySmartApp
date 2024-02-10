@@ -269,6 +269,118 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+class _MyHomePageState extends State<MyHomePage> {
+  File? selectedImage;
+  String? message = "";
+  // var message = [];
+  final List<String> imageList = ['myimg1.png', 'myimg2.png'];
+
+  Future getImage() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    selectedImage = File(pickedImage!.path);
+
+    message = "";
+
+    setState(() {});
+  }
+
+  uploadImage() async {
+    final request = http.MultipartRequest("POST",
+        Uri.parse("https://9c6d-43-255-220-50.ngrok-free.app/process_images"));
+
+    final headers = {"Contect-type": "multipart/form-data"};
+
+    request.files.add(http.MultipartFile('image',
+        selectedImage!.readAsBytes().asStream(), selectedImage!.lengthSync(),
+        filename: selectedImage!.path.split("/").last));
+
+    request.headers.addAll(headers);
+    final response = await request.send();
+    http.Response res = await http.Response.fromStream(response);
+    final resJson = jsonDecode(res.body);
+    message = resJson['message'];
+    // message = resJson;
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Smart Traffic App"),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            selectedImage == null
+                ? Text("Please pick a Image to upload")
+                : Image.file(selectedImage!),
+            TextButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
+              onPressed: uploadImage,
+              icon: Icon(Icons.upload_file, color: Colors.white),
+              label: Text("Upload",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+            ),
+            SizedBox(height: 20),
+            Text("Text: $message\n"),
+            TextButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
+              onPressed: () {
+                // Navigate to the ChallanTablePage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChallanTablePage()),
+                );
+              },
+              icon: Icon(Icons.receipt, color: Colors.white),
+              label: Text("Generate Challan",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+            ),
+            Expanded(
+                //   child: ListView.builder(
+                //     itemCount: imageList.length, // Replace with your image count
+                //     itemBuilder: (context, index) {
+                //       return Image.asset(
+                //         'assets/images/${imageList[index]}', // Replace with your actual path
+                //         width: 150,
+                //         height: 150,
+                //       );
+                //
+                //     },
+                //   ),
+
+                child: Column(
+              children: imageList
+                  .map((path) => Image.file(File(
+                      "H:/_Major-Project/ocr/number-plate-recognition/images/${path}")))
+                  .toList(),
+            )),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: getImage,
+        child: Icon(Icons.add_a_photo),
+      ),
+    );
+  }
+}
+
+
+
+
 //
 // class ChallanTablePage extends StatelessWidget {
 //   // @override
@@ -363,202 +475,3 @@ class MyHomePage extends StatefulWidget {
 //     );
 //   }
 // }
-
-class _MyHomePageState extends State<MyHomePage> {
-  File? selectedImage;
-  String? message = "";
-  // var message = [];
-  final List<String> imageList = ['myimg1.png', 'myimg2.png'];
-
-  Future getImage() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    selectedImage = File(pickedImage!.path);
-
-    message = "";
-
-    setState(() {});
-  }
-
-  uploadImage() async {
-    final request = http.MultipartRequest("POST",
-        Uri.parse("https://9c6d-43-255-220-50.ngrok-free.app/process_images"));
-
-    final headers = {"Contect-type": "multipart/form-data"};
-
-    request.files.add(http.MultipartFile('image',
-        selectedImage!.readAsBytes().asStream(), selectedImage!.lengthSync(),
-        filename: selectedImage!.path.split("/").last));
-
-    request.headers.addAll(headers);
-    final response = await request.send();
-    http.Response res = await http.Response.fromStream(response);
-    final resJson = jsonDecode(res.body);
-    message = resJson['message'];
-    // message = resJson;
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Smart Traffic App"),
-        backgroundColor: Colors.blue,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            selectedImage == null
-                ? Text("Please pick a Image to upload")
-                : Image.file(selectedImage!),
-            TextButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-              ),
-              onPressed: uploadImage,
-              icon: Icon(Icons.upload_file, color: Colors.white),
-              label: Text("Upload",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-            ),
-            SizedBox(height: 20),
-            Text("Text: $message\n"),
-            TextButton.icon(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
-              ),
-              onPressed: () {
-                // Navigate to the ChallanTablePage
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChallanTablePage()),
-                );
-              },
-              icon: Icon(Icons.receipt, color: Colors.white),
-              label: Text("Generate Challan",
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
-            ),
-            // Expanded(
-            //   child: ListView.builder(
-            //     itemCount: imageList.length, // Replace with your image count
-            //     itemBuilder: (context, index) {
-            //       return Image.asset(
-            //         'assets/images/${imageList[index]}', // Replace with your actual path
-            //         width: 150,
-            //         height: 150,
-            //       );
-            //     },
-            //   ),
-            // ),
-
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       child: ListView.builder(
-            //         itemCount: imageList.length,
-            //         itemBuilder: (context, index) {
-            //           return Image.asset(
-            //             'assets/images/${imageList[index]}',
-            //             width: 150,
-            //             height: 150,
-            //           );
-            //         },
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: Column(
-            //         children: [
-            //           TextField(
-            //             decoration: InputDecoration(
-            //               hintText: 'Enter text...',
-            //             ),
-            //           ),
-            //           SizedBox(height: 20), // Adjust the spacing as needed
-            //           Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //             children: [
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   // Add button logic here
-            //                 },
-            //                 child: Text('Add'),
-            //               ),
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   // Delete button logic here
-            //                 },
-            //                 child: Text('Delete'),
-            //               ),
-            //             ],
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            // )
-
-
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center, // Adjust as needed
-            //   children: [
-            //     Expanded(
-            //       child: ListView.builder(
-            //         itemCount: imageList.length,
-            //         itemBuilder: (context, index) {
-            //           return Image.asset(
-            //             'assets/images/${imageList[index]}',
-            //             width: 50,
-            //             height: 50,
-            //           );
-            //         },
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: Column(
-            //         children: [
-            //           TextField(
-            //             decoration: InputDecoration(
-            //               hintText: 'Enter text...',
-            //             ),
-            //           ),
-            //           SizedBox(height: 20),
-            //           Row(
-            //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //             children: [
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   // Add button logic here
-            //                 },
-            //                 child: Text('Add'),
-            //               ),
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   // Delete button logic here
-            //                 },
-            //                 child: Text('Delete'),
-            //               ),
-            //             ],
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            // )
-
-
-
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
-        child: Icon(Icons.add_a_photo),
-      ),
-    );
-  }
-}

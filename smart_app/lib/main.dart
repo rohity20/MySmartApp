@@ -249,6 +249,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:smart_app/ChallanTablePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -268,10 +269,106 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+//
+// class ChallanTablePage extends StatelessWidget {
+//   // @override
+//   // Widget build(BuildContext context) {
+//   //   // Build your table UI here
+//   //   return Scaffold(
+//   //     appBar: AppBar(
+//   //       title: Text("Challan Table"),
+//   //     ),
+//   //     body: Center(
+//   //       child: Table(
+//   //         border: TableBorder.all(),
+//   //         children: [
+//   //           TableRow(
+//   //             children: [
+//   //               TableCell(child: Text('Header 1')),
+//   //               TableCell(child: Text('Header 2')),
+//   //             ],
+//   //           ),
+//   //           TableRow(
+//   //             children: [
+//   //               TableCell(child: Text('Data 1')),
+//   //               TableCell(child: Text('Data 2')),
+//   //             ],
+//   //           ),
+//   //         ],
+//   //       ),
+//   //     ),
+//   //   );
+//   // }
+//   List<String> imageList = ['image1.png', 'image2.png']; // Replace with your image paths
+//   List<TextEditingController> textControllers = [];
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     // Initialize text controllers for each image
+//     textControllers = List.generate(imageList.length, (index) => TextEditingController());
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Challan Table"),
+//       ),
+//       body: Center(
+//         child: Table(
+//           border: TableBorder.all(),
+//           children: [
+//             TableRow(
+//               children: [
+//                 TableCell(child: Text('Image')),
+//                 TableCell(child: Text('Details')),
+//                 TableCell(child: Text('Actions')),
+//               ],
+//             ),
+//             for (int i = 0; i < imageList.length; i++)
+//               TableRow(
+//                 children: [
+//                   TableCell(child: Image.asset('assets/images/${imageList[i]}')),
+//                   TableCell(child: TextFormField(controller: textControllers[i])),
+//                   TableCell(
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                       children: [
+//                         ElevatedButton(
+//                           onPressed: () {
+//                             // Add button logic here (e.g., save details)
+//                             print('Details Saved for Image $i');
+//                           },
+//                           child: Text('Save'),
+//                         ),
+//                         ElevatedButton(
+//                           onPressed: () {
+//                             // Delete button logic here (e.g., remove image and corresponding details)
+//                             setState(() {
+//                               imageList.removeAt(i);
+//                               textControllers.removeAt(i);
+//                             });
+//                           },
+//                           child: Text('Delete'),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 class _MyHomePageState extends State<MyHomePage> {
   File? selectedImage;
   String? message = "";
   // var message = [];
+  final List<String> imageList = ['myimg1.png', 'myimg2.png'];
 
   Future getImage() async {
     final pickedImage =
@@ -333,13 +430,128 @@ class _MyHomePageState extends State<MyHomePage> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
               ),
-              onPressed: () {},
+              onPressed: () {
+                // Navigate to the ChallanTablePage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChallanTablePage()),
+                );
+              },
               icon: Icon(Icons.receipt, color: Colors.white),
               label: Text("Generate Challan",
                   style: TextStyle(
                     color: Colors.white,
                   )),
             ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: imageList.length, // Replace with your image count
+            //     itemBuilder: (context, index) {
+            //       return Image.asset(
+            //         'assets/images/${imageList[index]}', // Replace with your actual path
+            //         width: 150,
+            //         height: 150,
+            //       );
+            //     },
+            //   ),
+            // ),
+
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: ListView.builder(
+            //         itemCount: imageList.length,
+            //         itemBuilder: (context, index) {
+            //           return Image.asset(
+            //             'assets/images/${imageList[index]}',
+            //             width: 150,
+            //             height: 150,
+            //           );
+            //         },
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: Column(
+            //         children: [
+            //           TextField(
+            //             decoration: InputDecoration(
+            //               hintText: 'Enter text...',
+            //             ),
+            //           ),
+            //           SizedBox(height: 20), // Adjust the spacing as needed
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //             children: [
+            //               ElevatedButton(
+            //                 onPressed: () {
+            //                   // Add button logic here
+            //                 },
+            //                 child: Text('Add'),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {
+            //                   // Delete button logic here
+            //                 },
+            //                 child: Text('Delete'),
+            //               ),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // )
+
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center, // Adjust as needed
+            //   children: [
+            //     Expanded(
+            //       child: ListView.builder(
+            //         itemCount: imageList.length,
+            //         itemBuilder: (context, index) {
+            //           return Image.asset(
+            //             'assets/images/${imageList[index]}',
+            //             width: 50,
+            //             height: 50,
+            //           );
+            //         },
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: Column(
+            //         children: [
+            //           TextField(
+            //             decoration: InputDecoration(
+            //               hintText: 'Enter text...',
+            //             ),
+            //           ),
+            //           SizedBox(height: 20),
+            //           Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //             children: [
+            //               ElevatedButton(
+            //                 onPressed: () {
+            //                   // Add button logic here
+            //                 },
+            //                 child: Text('Add'),
+            //               ),
+            //               ElevatedButton(
+            //                 onPressed: () {
+            //                   // Delete button logic here
+            //                 },
+            //                 child: Text('Delete'),
+            //               ),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // )
+
+
+
           ],
         ),
       ),

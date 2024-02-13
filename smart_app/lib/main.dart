@@ -273,6 +273,12 @@ class _MyHomePageState extends State<MyHomePage> {
   File? selectedImage;
   // String? message = "";
   var message = [];
+  final List<Map<String, dynamic>> mymessage = [];
+  // [
+  //   {"urll": "urrll", "text": "11111"},
+  //   {"urll": "mslkjk", "text": "222222"}
+  // ];
+
   final List<String> imageList = ['myimg1.png', 'myimg2.png'];
 
   Future getImage() async {
@@ -282,13 +288,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // message = "";
     message = [];
+    mymessage.clear();
 
     setState(() {});
   }
 
   uploadImage() async {
     final request = http.MultipartRequest("POST",
-        Uri.parse("https://a356-43-241-124-121.ngrok-free.app/process_images"));
+        Uri.parse("https://6ba7-43-241-124-121.ngrok-free.app/process_images"));
 
     final headers = {"Contect-type": "multipart/form-data"};
 
@@ -301,8 +308,17 @@ class _MyHomePageState extends State<MyHomePage> {
     http.Response res = await http.Response.fromStream(response);
     final resJson = jsonDecode(res.body);
     // message = resJson['message'];
-    message = resJson;
-    setState(() {});
+    // message = resJson;\
+
+    // mymessage = List<Map<String, dynamic>>.from(resJson);
+    // setState(() {});
+
+    // Clear the mymessage list
+    mymessage.clear();
+
+    // Populate the mymessage list with the new data
+    mymessage.addAll(List<Map<String, dynamic>>.from(resJson));
+    // mymessage = List<Map<String, dynamic>>.from(resJson);
   }
 
   @override
@@ -331,7 +347,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )),
             ),
             SizedBox(height: 20),
-            Text("Text: ${message.length}\n"),
+            Text("Text: ${mymessage.length}\n"),
             TextButton.icon(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -341,7 +357,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => widget(child: ChallanTablePage())),
+                    builder: (context) =>
+                        ChallanTablePage(dataArray: mymessage),
+                  ),
                 );
               },
               icon: Icon(Icons.receipt, color: Colors.white),

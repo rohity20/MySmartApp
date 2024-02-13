@@ -5,21 +5,46 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
 class ChallanTablePage extends StatefulWidget {
-  ChallanTablePage(List message, {required List message, required List msg});
+  // var dataArray;
+  // final List<Map<String, dynamic>> dataArray;
+
+  // // Constructor to receive the array
+  // ChallanTablePage({required this.dataArray});
+
+  List<Map<String, dynamic>> dataArray;
+
+  ChallanTablePage({required this.dataArray});
 
   @override
   _ChallanTablePageState createState() => _ChallanTablePageState();
 }
 
 class _ChallanTablePageState extends State<ChallanTablePage> {
-  List<String> imageList = ['myimg1.png', 'myimg2.png']; // Replace with your image paths
+  // final List<YourObjectType> dataArray;
+
+  // // Constructor to receive the array
+  // ChallanTablePage({required this.dataArray});
+
+  // final List<Map<String, dynamic>> dataArray;
+
+  // // Constructor to receive the array
+  // ChallanTablePage({required this.dataArray});
+
+  List<String> imageList = [
+    'myimg1.png',
+    'myimg2.png'
+  ]; // Replace with your image paths
   List<TextEditingController> textControllers = [];
 
   @override
   void initState() {
     super.initState();
     // Initialize text controllers for each image
-    textControllers = List.generate(imageList.length, (index) => TextEditingController());
+    textControllers = List.generate(
+        widget.dataArray.length,
+        (index) => TextEditingController(
+            text: widget.dataArray[index]['text'] ?? 'rohi'));
+    // text: 'rohi'));
   }
 
   @override
@@ -39,14 +64,21 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
                 TableCell(child: Text('Actions')),
               ],
             ),
-            for (int i = 0; i < imageList.length; i++)
+            for (int i = 0; i < widget.dataArray.length; i++)
               TableRow(
                 children: [
-                  TableCell(child: Image.asset('assets/images/${imageList[i]}',
-                              width: 100,
-                              height: 100,
-                       )),
-                  TableCell(child: TextFormField(controller: textControllers[i], textAlign: TextAlign.center,)),
+                  TableCell(
+                      child: Image.network(
+                    // 'assets/images/${imageList[i]}',
+                    widget.dataArray[i]["url"],
+                    width: 100,
+                    height: 100,
+                  )),
+                  TableCell(
+                      child: TextFormField(
+                    controller: textControllers[i],
+                    textAlign: TextAlign.center,
+                  )),
                   TableCell(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

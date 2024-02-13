@@ -271,8 +271,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   File? selectedImage;
-  String? message = "";
-  // var message = [];
+  // String? message = "";
+  var message = [];
   final List<String> imageList = ['myimg1.png', 'myimg2.png'];
 
   Future getImage() async {
@@ -280,14 +280,15 @@ class _MyHomePageState extends State<MyHomePage> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     selectedImage = File(pickedImage!.path);
 
-    message = "";
+    // message = "";
+    message = [];
 
     setState(() {});
   }
 
   uploadImage() async {
     final request = http.MultipartRequest("POST",
-        Uri.parse("https://9c6d-43-255-220-50.ngrok-free.app/process_images"));
+        Uri.parse("https://a356-43-241-124-121.ngrok-free.app/process_images"));
 
     final headers = {"Contect-type": "multipart/form-data"};
 
@@ -299,8 +300,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final response = await request.send();
     http.Response res = await http.Response.fromStream(response);
     final resJson = jsonDecode(res.body);
-    message = resJson['message'];
-    // message = resJson;
+    // message = resJson['message'];
+    message = resJson;
     setState(() {});
   }
 
@@ -330,7 +331,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )),
             ),
             SizedBox(height: 20),
-            Text("Text: $message\n"),
+            Text("Text: ${message.length}\n"),
             TextButton.icon(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -339,7 +340,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Navigate to the ChallanTablePage
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ChallanTablePage()),
+                  MaterialPageRoute(
+                      builder: (context) => widget(child: ChallanTablePage())),
                 );
               },
               icon: Icon(Icons.receipt, color: Colors.white),
@@ -348,25 +350,36 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                   )),
             ),
-            Expanded(
-                //   child: ListView.builder(
-                //     itemCount: imageList.length, // Replace with your image count
-                //     itemBuilder: (context, index) {
-                //       return Image.asset(
-                //         'assets/images/${imageList[index]}', // Replace with your actual path
-                //         width: 150,
-                //         height: 150,
-                //       );
-                //
-                //     },
-                //   ),
 
-                child: Column(
-              children: imageList
-                  .map((path) => Image.file(File(
-                      "H:/_Major-Project/ocr/number-plate-recognition/images/${path}")))
-                  .toList(),
-            )),
+            // Expanded(
+            //   // child: ListView.builder(
+            //   //   itemCount: imageList.length, // Replace with your image count
+            //   //   itemBuilder: (context, index) {
+            //   //     return Image.asset(
+            //   //       'assets/images/${imageList[index]}', // Replace with your actual path
+            //   //       width: 150,
+            //   //       height: 150,
+            //   //     );
+            //
+            //   //   },
+            //   // ),
+            //
+            //   child: ListView.builder(
+            //     itemCount: message.length, // Replace with your image count
+            //     itemBuilder: (context, index) {
+            //       return ListTile(
+            //         title: Text(message[index].text),
+            //       );
+            //     },
+            //   ),
+            //
+            //   //   child: Column(
+            //   // children: imageList
+            //   //     .map((path) => Image.file(File(
+            //   //         "H:/_Major-Project/ocr/number-plate-recognition/images/${path}")))
+            //   //     .toList(),
+            // )
+            // ),
           ],
         ),
       ),

@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
 class ChallanTablePage extends StatefulWidget {
+  ChallanTablePage(List message, {required List message, required List msg});
+
   @override
   _ChallanTablePageState createState() => _ChallanTablePageState();
 }

@@ -226,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             selectedImages.isEmpty
-                ? Text("Please pick Images to upload")
+                ? Text("Please pick Images/Videos to upload")
                 : SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -258,7 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 20),
-            Text("Text: ${mymessage.length}\n"),
+            Text("Total Detections: ${mymessage.length}\n"),
             TextButton.icon(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),

@@ -68,31 +68,70 @@ class _MyHomePageState extends State<MyHomePage> {
       });
   }
 
+  // uploadImages() async {
+  //   final request = http.MultipartRequest(
+  //     "POST",
+  //     Uri.parse("https://262c-103-230-149-33.ngrok-free.app/upload"),
+  //   );
+  //
+  //   final headers = {"Content-type": "multipart/form-data"};
+  //
+  //   for (File? image in selectedImages) {
+  //     request.files.add(http.MultipartFile(
+  //       'images',
+  //       image!.readAsBytes().asStream(),
+  //       image.lengthSync(),
+  //       filename: image.path.split("/").last,
+  //     ));
+  //   }
+  //
+  //   request.headers.addAll(headers);
+  //   final response = await request.send();
+  //   http.Response res = await http.Response.fromStream(response);
+  //   final resJson = jsonDecode(res.body);
+  //
+  //   mymessage.clear();
+  //   mymessage.addAll(List<Map<String, dynamic>>.from(resJson));
+  // }
+
   uploadImages() async {
-    final request = http.MultipartRequest(
-      "POST",
-      Uri.parse("https://d408-103-197-221-179.ngrok-free.app/process_images"),
-    );
+    try {
+      final request = http.MultipartRequest(
+        "POST",
+        Uri.parse("https://262c-103-230-149-33.ngrok-free.app/process_images"),
+      );
 
-    final headers = {"Content-type": "multipart/form-data"};
+      final headers = {"Content-type": "multipart/form-data"};
 
-    for (File? image in selectedImages) {
-      request.files.add(http.MultipartFile(
-        'images',
-        image!.readAsBytes().asStream(),
-        image.lengthSync(),
-        filename: image.path.split("/").last,
-      ));
+      for (File? image in selectedImages) {
+        request.files.add(http.MultipartFile(
+          'images',
+          image!.readAsBytes().asStream(),
+          image.lengthSync(),
+          filename: image.path.split("/").last,
+        ));
+      }
+
+      request.headers.addAll(headers);
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        // Upload successful
+        final resJson = await http.Response.fromStream(response);
+        mymessage.clear();
+        mymessage.addAll(List<Map<String, dynamic>>.from(jsonDecode(resJson.body)));
+        print("Response: $resJson");
+      } else {
+        // Handle error
+        print("Error: ${response.reasonPhrase}");
+      }
+    } catch (error) {
+      // Handle exception
+      print("Error: $error");
     }
-
-    request.headers.addAll(headers);
-    final response = await request.send();
-    http.Response res = await http.Response.fromStream(response);
-    final resJson = jsonDecode(res.body);
-
-    mymessage.clear();
-    mymessage.addAll(List<Map<String, dynamic>>.from(resJson));
   }
+
 
   @override
   Widget build(BuildContext context) {

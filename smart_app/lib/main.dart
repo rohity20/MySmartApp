@@ -26,6 +26,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<File?> selectedImages = [];
+  List<File?> selectedVideos = [];
+
   var message = [];
   final List<Map<String, dynamic>> mymessage = [];
 
@@ -48,12 +50,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getVideos() async {
     selectedImages = [];
     final video = await picker.pickVideo(source: ImageSource.gallery);
-    _video = File(video!.path);
-    _videoPlayerController = VideoPlayerController.file(_video)
-      ..initialize().then((_) {
-        setState(() {});
-        _videoPlayerController.play();
-      });
+    if(video != null) {
+      _video = File(video!.path);
+      _videoPlayerController = VideoPlayerController.file(_video)
+        ..initialize().then((_) {
+          setState(() {});
+          _videoPlayerController.play();
+        });
+      selectedVideos.add(_video);
+    }
   }
 
   @override
@@ -133,6 +138,86 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+
+  // uploadVideos() async {
+  //   try {
+  //     final request = http.MultipartRequest(
+  //       "POST",
+  //       Uri.parse("https://1c6b-103-230-149-33.ngrok-free.app/upload_videos"), // Update URL
+  //     );
+  //
+  //     final headers = {"Content-type": "multipart/form-data"};
+  //
+  //     for (File? video in selectedVideos) {
+  //       request.files.add(http.MultipartFile(
+  //         'videos', // Update field name to 'videos'
+  //         video!.readAsBytes().asStream(),
+  //         video.lengthSync(),
+  //         filename: video.path.split("/").last,
+  //       ));
+  //     }
+  //
+  //     request.headers.addAll(headers);
+  //
+  //     final response = await request.send();
+  //
+  //     if (response.statusCode == 200) {
+  //       // Upload successful
+  //       final resJson = await http.Response.fromStream(response);
+  //       mymessage.clear();
+  //       mymessage.addAll(List<Map<String, dynamic>>.from(jsonDecode(resJson.body)));
+  //       print("Response: $resJson");
+  //     } else {
+  //       // Handle error
+  //       print("Error: ${response.reasonPhrase}");
+  //     }
+  //   } catch (error) {
+  //     // Handle exception
+  //     print("Error: $error");
+  //   }
+  // }
+
+  uploadVideos() async {
+    try {
+      final request = http.MultipartRequest(
+        "POST",
+        Uri.parse("https://1c6b-103-230-149-33.ngrok-free.app/upload_videos"), // Update URL
+      );
+
+      final headers = {"Content-type": "multipart/form-data"};
+
+      for (File? video in selectedVideos) {
+        request.files.add(http.MultipartFile(
+          'videos', // Update field name to 'videos'
+          video!.readAsBytes().asStream(),
+          video.lengthSync(),
+          filename: video.path.split("/").last,
+        ));
+      }
+
+      request.headers.addAll(headers);
+
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        // Upload successful
+        final resString = await response.stream.bytesToString(); // Convert response to String
+        final resJson = jsonDecode(resString);
+        mymessage.clear();
+        mymessage.addAll(List<Map<String, dynamic>>.from(resJson));
+        print("Response: $resString"); // Print the response as a String
+      } else {
+        // Handle error
+        print("Error: ${response.reasonPhrase}");
+      }
+    } catch (error) {
+      // Handle exception
+      print("Error: $error");
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),
               ),
-              onPressed: uploadImages,
+              onPressed: uploadVideos,
               icon: Icon(Icons.upload_file, color: Colors.white),
               label: Text(
                 "Upload",

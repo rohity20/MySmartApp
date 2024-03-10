@@ -29,7 +29,12 @@ class _MyHomePageState extends State<MyHomePage> {
   List<File?> selectedVideos = [];
 
   var message = [];
-  final List<Map<String, dynamic>> mymessage = [];
+  final List<Map<String, dynamic>> mymessage = [
+    {"url": 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmTzKMbJvja-z7szck0ATH-mUasMlhM_ZNqQ&usqp=CAU',
+     "text": 'MH02RT2578'},
+    {"url": 'https://cdn.marvel.com/content/1x/002irm_ons_mas_mob_01_0.jpg',
+      "text": 'UP93VH8734'},
+  ];
 
   late VideoPlayerController _videoPlayerController;
   late File _video;

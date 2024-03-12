@@ -243,6 +243,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Smart Traffic App"),
         backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

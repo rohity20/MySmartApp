@@ -144,7 +144,9 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Challan Table"),
+        title: Text("Vehicle Number Plates"),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
       body: Center(
         child: Table(
@@ -220,7 +222,7 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
                         MaterialPageRoute(
                           builder: (context) =>
                               // UserChallan(dataArray: widget.dataArray),
-                              const CRUDEoperation(),
+                              CRUDEoperation(dataArray: widget.dataArray),
                         ),
                       );
                     },

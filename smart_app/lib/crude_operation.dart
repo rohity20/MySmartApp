@@ -2,13 +2,45 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CRUDEoperation extends StatefulWidget {
-  const CRUDEoperation({super.key});
+  // const CRUDEoperation({super.key});
+  final List<dynamic>? dataArray;
+  const CRUDEoperation({Key? key, this.dataArray}) : super(key: key);
 
   @override
   State<CRUDEoperation> createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<CRUDEoperation> {
+  // List<TextEditingController> textControllers = [];
+
+  // final List<dynamic>? dataArray;
+
+  // _MyWidgetState({this.dataArray});
+
+  //  @override
+  // void initState() {
+  //   super.initState();
+  //   // Initialize text controllers for each image
+  //   textControllers = List.generate(
+  //     widget.dataArray!.length,
+  //     (index) => TextEditingController(
+  //       text: widget.dataArray![index]['text'] ?? 'rohi',
+  //     ),
+  //   );
+  // }
+
+  List<String> myarray = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize text controllers for each image
+    myarray = List.generate(
+      widget.dataArray!.length,
+      (index) => widget.dataArray![index]['text'] ?? 'rohi',
+    );
+  }
+
   // text field controller
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
@@ -113,7 +145,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
               children: [
                 const Center(
                   child: Text(
-                    "Update your item",
+                    "Generate Challan",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -159,7 +191,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
                         Navigator.of(context).pop();
                       }
                     },
-                    child: const Text("Update"))
+                    child: const Text("Submit"))
               ],
             ),
           );
@@ -204,7 +236,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
                       hintText: 'Search..'),
                 ),
               )
-            : const Text('CRUD Operaion'),
+            : const Text('Generate Challan'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -216,8 +248,23 @@ class _MyWidgetState extends State<CRUDEoperation> {
               icon: Icon(isSearchClicked ? Icons.close : Icons.search))
         ],
       ),
+
+      // body: ListView.builder(
+      //   itemCount: myarray.length,
+      //   itemBuilder: (context, index) {
+      //     return Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: Text(
+      //         myarray[index] ?? 'No text available',
+      //         style: TextStyle(fontSize: 16),
+      //       ),
+      //     );
+      //   },
+      // ),
+
       body: StreamBuilder(
-        stream: _items.snapshots(),
+        // stream: _items.snapshots(),
+        stream: _items.where('vehno', whereIn: myarray).snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {
             final List<DocumentSnapshot> items = streamSnapshot.data!.docs
@@ -230,7 +277,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
                 itemBuilder: (context, index) {
                   final DocumentSnapshot documentSnapshot = items[index];
                   return Card(
-                    color: const Color.fromARGB(255, 88, 136, 190),
+                    color: Color.fromARGB(255, 19, 107, 207),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -275,10 +322,11 @@ class _MyWidgetState extends State<CRUDEoperation> {
           );
         },
       ),
+
       // Create new project button
       floatingActionButton: FloatingActionButton(
         onPressed: () => _create(),
-        backgroundColor: const Color.fromARGB(255, 88, 136, 190),
+        backgroundColor: Color.fromARGB(255, 38, 110, 192),
         child: const Icon(Icons.add),
       ),
     );

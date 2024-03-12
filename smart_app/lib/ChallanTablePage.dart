@@ -112,14 +112,9 @@
 //   }
 // }
 
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:smart_app/UserChallan.dart';
+import 'package:smart_app/crude_operation.dart';
 
 class ChallanTablePage extends StatefulWidget {
   final List<Map<String, dynamic>> dataArray;
@@ -139,7 +134,7 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
     // Initialize text controllers for each image
     textControllers = List.generate(
       widget.dataArray.length,
-          (index) => TextEditingController(
+      (index) => TextEditingController(
         text: widget.dataArray[index]['text'] ?? 'rohi',
       ),
     );
@@ -216,14 +211,16 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Submit button logic here (e.g., send updated array)
-                      print('Updated Array Submitted ${widget.dataArray.length}');
+                      print(
+                          'Updated Array Submitted ${widget.dataArray.length}');
 
                       // Call a function or send data to FineTable.dart file
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              UserChallan(dataArray: widget.dataArray),
+                              // UserChallan(dataArray: widget.dataArray),
+                              const CRUDEoperation(),
                         ),
                       );
                     },
@@ -238,4 +235,3 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
     );
   }
 }
-

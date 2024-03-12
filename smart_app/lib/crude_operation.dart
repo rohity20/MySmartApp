@@ -18,6 +18,9 @@ class _MyWidgetState extends State<CRUDEoperation> {
   final CollectionReference _items =
       FirebaseFirestore.instance.collection('items');
 
+  final CollectionReference _challan =
+      FirebaseFirestore.instance.collection('challan');
+
   String searchText = '';
   // for create operation
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
@@ -90,8 +93,9 @@ class _MyWidgetState extends State<CRUDEoperation> {
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
       _nameController.text = documentSnapshot['name'];
-      _snController.text = documentSnapshot['sn'].toString();
-      _numberController.text = documentSnapshot['number'].toString();
+      _snController.text = documentSnapshot['vehno'].toString();
+      // _numberController.text = documentSnapshot['number'].toString();
+      _numberController.text = '0';
     }
     await showModalBottomSheet(
         isScrollControlled: true,
@@ -121,8 +125,8 @@ class _MyWidgetState extends State<CRUDEoperation> {
                 TextField(
                   keyboardType: TextInputType.number,
                   controller: _snController,
-                  decoration:
-                      const InputDecoration(labelText: 'S.N', hintText: 'eg.1'),
+                  decoration: const InputDecoration(
+                      labelText: 'Vehicle_No', hintText: 'eg.1'),
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
@@ -136,12 +140,18 @@ class _MyWidgetState extends State<CRUDEoperation> {
                 ElevatedButton(
                     onPressed: () async {
                       final String name = _nameController.text;
-                      final int? sn = int.tryParse(_snController.text);
+                      // final int? sn = int.tryParse(_snController.text);
+                      final String? sn = _snController.text;
                       final int? number = int.tryParse(_numberController.text);
+                      // if (number != null) {
+                      //   await _items
+                      //       .doc(documentSnapshot!.id)
+                      //       .update({"name": name, "number": number, "sn": sn});
+
                       if (number != null) {
-                        await _items
-                            .doc(documentSnapshot!.id)
-                            .update({"name": name, "number": number, "sn": sn});
+                        await _challan.add(
+                            {"name": name, "challan": number, "vehno": sn});
+
                         _nameController.text = '';
                         _snController.text = '';
                         _numberController.text = '';
@@ -240,7 +250,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),
                       ),
-                      subtitle: Text(documentSnapshot['number'].toString()),
+                      subtitle: Text(documentSnapshot['vehno'].toString()),
                       trailing: SizedBox(
                         width: 100,
                         child: Row(

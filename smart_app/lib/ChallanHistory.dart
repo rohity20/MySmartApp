@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class CRUDEoperation extends StatefulWidget {
-  // const CRUDEoperation({super.key});
-  final List<dynamic>? dataArray;
-  const CRUDEoperation({Key? key, this.dataArray}) : super(key: key);
+class ChallanHistory extends StatefulWidget {
+  const ChallanHistory({super.key});
+  // final List<dynamic>? dataArray;
+  // const ChallanHistory({Key? key, this.dataArray}) : super(key: key);
 
   @override
-  State<CRUDEoperation> createState() => _MyWidgetState();
+  State<ChallanHistory> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<CRUDEoperation> {
+class _MyWidgetState extends State<ChallanHistory> {
   // List<TextEditingController> textControllers = [];
 
   // final List<dynamic>? dataArray;
@@ -35,10 +35,10 @@ class _MyWidgetState extends State<CRUDEoperation> {
   void initState() {
     super.initState();
     // Initialize text controllers for each image
-    myarray = List.generate(
-      widget.dataArray!.length,
-      (index) => widget.dataArray![index]['text'] ?? 'rohi',
-    );
+    // myarray = List.generate(
+    //   widget.dataArray!.length,
+    //   (index) => widget.dataArray![index]['text'] ?? 'rohi',
+    // );
   }
 
   // text field controller
@@ -226,7 +226,8 @@ class _MyWidgetState extends State<CRUDEoperation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        // backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
         title: isSearchClicked
             ? Container(
                 height: 40,
@@ -244,7 +245,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
                       hintText: 'Search..'),
                 ),
               )
-            : const Text('Generate Challan'),
+            : const Text('Challan History..'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -272,7 +273,9 @@ class _MyWidgetState extends State<CRUDEoperation> {
 
       body: StreamBuilder(
         // stream: _items.snapshots(),
-        stream: _items.where('vehno', whereIn: myarray).snapshots(),
+        // stream: _items.where('vehno', whereIn: myarray).snapshots(),
+        // stream: _items.snapshots(),
+        stream: _challan.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {
             final List<DocumentSnapshot> items = streamSnapshot.data!.docs
@@ -289,19 +292,20 @@ class _MyWidgetState extends State<CRUDEoperation> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    margin: const EdgeInsets.all(10),
+                    // margin: const EdgeInsets.all(10),
+                    margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 27,
-                        // backgroundColor: const Color.fromARGB(255, 26, 226, 76),
-                        // child: Text(
-                        //   documentSnapshot['sn'].toString(),
-                        //   style: const TextStyle(
-                        //       fontWeight: FontWeight.bold, color: Colors.black),
-                        // ),
-                        // backgroundImage: AssetImage('https://qph.cf2.quoracdn.net/main-thumb-123333959-50-jnmtvlvbqfmjuqaubgtoixulfpycbjyf.jpeg'),
-                        backgroundImage: AssetImage('assets/images/rohit.png'),
-                      ),
+                      // leading: CircleAvatar(
+                      //   radius: 27,
+                      //   // backgroundColor: const Color.fromARGB(255, 26, 226, 76),
+                      //   // child: Text(
+                      //   //   documentSnapshot['sn'].toString(),
+                      //   //   style: const TextStyle(
+                      //   //       fontWeight: FontWeight.bold, color: Colors.black),
+                      //   // ),
+                      //   // backgroundImage: AssetImage('https://qph.cf2.quoracdn.net/main-thumb-123333959-50-jnmtvlvbqfmjuqaubgtoixulfpycbjyf.jpeg'),
+                      //   backgroundImage: AssetImage('assets/images/rohit.png'),
+                      // ),
                       title: Text(
                         documentSnapshot['name'],
                         style: const TextStyle(
@@ -309,45 +313,166 @@ class _MyWidgetState extends State<CRUDEoperation> {
                       ),
                       // subtitle: Text(documentSnapshot['vehno'].toString()),
                       subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start of the column
+                        crossAxisAlignment: CrossAxisAlignment
+                            .start, // Align text to the start of the column
                         children: [
+                          // Text(
+                          //   documentSnapshot['vehno'].toString(),
+                          //   style: const TextStyle(
+                          //     color: Colors.black,
+                          //     // Add any additional text style properties here
+                          //   ),
+                          // ),
+                          // Text(
+                          //   documentSnapshot['challan'].toString(),
+                          //   style: const TextStyle(
+                          //     color: Colors.black,
+                          //     // Add any additional text style properties here
+                          //   ),
+                          // ),
+                          // Text(
+                          //   documentSnapshot['status'].toString(),
+                          //   style: const TextStyle(
+                          //     color: Colors.black,
+                          //     // Add any additional text style properties here
+                          //   ),
+                          // ),
 
-                          Text(
-                            documentSnapshot['veh-type'].toString(),
-                            style: const TextStyle(
-                              color: Colors.black,
-                              // Add any additional text style properties here
-                            ),
+                          // Text(
+                          //   documentSnapshot['vehno'].toString(),
+                          //   style: const TextStyle(
+                          //     color: Colors.black,
+                          //     // Add any additional text style properties here
+                          //   ),
+                          // ),
+                          // Text(
+                          //   documentSnapshot['challan'].toString(),
+                          //   style: const TextStyle(
+                          //     color: Colors.black,
+                          //     // Add any additional text style properties here
+                          //   ),
+                          // ),
+
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //       documentSnapshot['status'].toString(),
+                          //       style: const TextStyle(
+                          //         color: Colors.black,
+                          //         // Add any additional text style properties here
+                          //       ),
+                          //     ),
+                          //     SizedBox(
+                          //         width:
+                          //             8), // Adjust the width of the gap between the text and the rectangle
+                          //     Container(
+                          //       width: 20, // Adjust the width of the rectangle
+                          //       height:
+                          //           20, // Adjust the height of the rectangle
+                          //       decoration: BoxDecoration(
+                          //         color: documentSnapshot['status'] == 'paid'
+                          //             ? Colors.green
+                          //             : Colors
+                          //                 .red, // Set color based on the status
+                          //         borderRadius: BorderRadius.circular(
+                          //             4), // Adjust the border radius as needed
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      documentSnapshot['vehno'].toString(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        // Add any additional text style properties here
+                                      ),
+                                    ),
+                                    Text(
+                                      documentSnapshot['challan'].toString(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        // Add any additional text style properties here
+                                      ),
+                                    ),
+                                    // Add any additional details here except for the status value
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  width:
+                                      8), // Adjust the width of the gap between the columns
+                              // Text(
+                              //   documentSnapshot['status'].toString(),
+                              //   style: const TextStyle(
+                              //     color: Colors.black,
+                              //     backgroundColor:
+                              //         documentSnapshot['status'] == 'paid'
+                              //             ? Colors.green
+                              //             : Colors.red,
+                              //     // Add any additional text style properties here
+                              //   ),
+                              // ),
+
+                              // Container(
+                              //   color: documentSnapshot['status'] == 'paid'
+                              //       ? const Color.fromARGB(255, 38, 223, 44)
+                              //       : const Color.fromARGB(255, 221, 28, 14),
+                              //   child: Text(
+                              //     documentSnapshot['status'].toString(),
+                              //     style: const TextStyle(
+                              //       color: Colors.black,
+                              //       // Add any additional text style properties here
+                              //     ),
+                              //   ),
+                              // ),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 80,
+                                    height: 30,
+                                    color: documentSnapshot['status'] == 'Paid'
+                                        ? const Color.fromARGB(255, 38, 223, 44)
+                                        : const Color.fromARGB(
+                                            255, 221, 28, 14),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        documentSnapshot['status'].toString(),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          // Add any additional text style properties here
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          Text(
-                            documentSnapshot['veh-model'].toString(),
-                            style: const TextStyle(
-                              color: Colors.black,
-                              // Add any additional text style properties here
-                            ),
-                          ),
-                          Text(
-                            documentSnapshot['vehno'].toString(),
-                            style: const TextStyle(
-                              color: Colors.black,
-                              // Add any additional text style properties here
-                            ),
-                          ),
-                          // Add more Text widgets for additional lines of text if needed
                         ],
                       ),
                       trailing: SizedBox(
                         width: 100,
                         child: Row(
                           children: [
-                            IconButton(
-                                color: Colors.black,
-                                onPressed: () => _update(documentSnapshot),
-                                icon: const Icon(Icons.edit)),
-                            IconButton(
-                                color: Colors.black,
-                                onPressed: () => _delete(documentSnapshot.id),
-                                icon: const Icon(Icons.delete)),
+                            // IconButton(
+                            //     color: Colors.black,
+                            //     onPressed: () => _update(documentSnapshot),
+                            //     icon: const Icon(Icons.edit)),
+                            // IconButton(
+                            //     color: Colors.black,
+                            //     onPressed: () => _delete(documentSnapshot.id),
+                            //     icon: const Icon(Icons.delete)),
                           ],
                         ),
                       ),
@@ -362,13 +487,12 @@ class _MyWidgetState extends State<CRUDEoperation> {
       ),
 
       // Create new project button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _create(),
-        backgroundColor: Color.fromARGB(255, 38, 110, 192),
-        // child: const Icon(Icons.add),
-        child: Text("Send"),
-      ),
-
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => _create(),
+      //   backgroundColor: Color.fromARGB(255, 38, 110, 192),
+      //   // child: const Icon(Icons.add),
+      //   child: Text("Send"),
+      // ),
     );
   }
 }

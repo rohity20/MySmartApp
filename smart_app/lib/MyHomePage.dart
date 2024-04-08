@@ -222,10 +222,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        // title: Text("Smart Traffic App"),
-        // backgroundColor: Colors.blue,
-        // centerTitle: true,
+        title: Text("Smart Traffic App"),
+        backgroundColor: Colors.blue,
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -242,9 +243,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: VideoPlayer(_videoPlayerController),
                           )
                         : Container(
-                            child: Text("Video Initialization Error"),
+                            // child: Text("Video Initialization Error"),
+                            child: Text("Please pick Images/Videos to upload"),
                           )
-                    : Text("Please pick Images/Videos  to  upload"))
+                    : Text("Please pick Images / Videos to upload"))
                 : SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -289,7 +291,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 20),
-            Text("Total Detections: ${mymessage.length}\n"),
+            // Text("Total Detections: ${mymessage.length}\n"),
+            Text("Total Detections: 0\n"),
             TextButton.icon(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),

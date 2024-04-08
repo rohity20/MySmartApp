@@ -2,9 +2,11 @@
 import 'package:smart_app/consts/consts.dart';
 
 const icAdd = "assets/icons/add.png";
-const icAppLogo = "assets/icons/app_logo.png";
+// const icAppLogo = "assets/icons/app_logo.png";
+const icAppLogo = "assets/icons/smart_app_logo.png";
 
-const icMeeshoLogo = "assets/icons/Meesho_Logo_Full.png";
+// const icMeeshoLogo = "assets/icons/Meesho_Logo_Full.png";
+const icMeeshoLogo = "assets/icons/smart_app_logo.png";
 
 const icAppleLogo = "assets/icons/apple_logo.png";
 const icArrow = "assets/icons/arrow.png";
@@ -12,8 +14,12 @@ const icBell = "assets/icons/bell.png";
 const icBlog = "assets/icons/blog.png";
 const icBrands = "assets/icons/brands.png";
 const icCompaigns = "assets/icons/compaigns.png";
-const icCart = "assets/icons/cart.png";
-const icCategories = "assets/icons/categories.png";
+// const icCart = "assets/icons/cart.png";
+// const icCategories = "assets/icons/categories.png";
+
+const icCart = "assets/icons/messages.png";
+const icCategories = "assets/icons/challan.png";
+
 const icChangePassword = "assets/icons/changed_password.png";
 const icChat = "assets/icons/chat.png";
 const icClubpoint = "assets/icons/clubpoint.png";
@@ -27,6 +33,11 @@ const icGoogleLogo = "assets/icons/google_logo.png";
 const icMenu = "assets/icons/o-hamburger.png";
 const icHeadphone = "assets/icons/headphone.png";
 const icHeart = "assets/icons/heart.png";
+
+const icUser = "assets/icons/user.png";
+const icPhoto = "assets/icons/image.png";
+const icVideo = "assets/icons/video.png";
+
 const icHome = "assets/icons/home.png";
 const icLogin = "assets/icons/login.png";
 const icLogout = "assets/icons/logout.png";
@@ -57,7 +68,7 @@ const icWholeSale = "assets/icons/wholesale.png";
 const icShare = "assets/icons/share.png";
 //images
 
-const imgBackground = "assets/icons/bg.png";
+const imgBackground = "assets/icons/mybg2.png";
 const imgB1 = "assets/images/b1.jpeg";
 const imgB2 = "assets/images/b2.jpeg";
 const imgB3 = "assets/images/b3.jpeg";
@@ -104,7 +115,7 @@ const imgPi2 = "assets/images/pi2.jpg";
 const imgPi3 = "assets/images/pi3.jpg";
 const imgPi4 = "assets/images/pi4.jpg";
 const imgPi5 = "assets/images/pi5.jpg";
-const imgProfile2 = "assets/images/profile_image_rohit.jpg";
+const imgProfile2 = "assets/images/rohit.png";
 const imgProfile = "assets/images/profile_image.png";
 const imgRavePayment = "assets/images/rave_payment.png";
 const imgRozarpay = "assets/images/rozarpay.png";

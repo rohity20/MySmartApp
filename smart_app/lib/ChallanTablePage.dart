@@ -260,7 +260,7 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
     // Initialize text controllers for each image
     textControllers = List.generate(
       widget.dataArray.length,
-          (index) => TextEditingController(
+      (index) => TextEditingController(
         text: widget.dataArray[index]['text'] ?? 'rohi',
       ),
     );
@@ -269,6 +269,7 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Vehicle Number Plates"),
         backgroundColor: Colors.blue,
@@ -294,8 +295,8 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
                     child: Center(
                       child: Text(
                         'Image',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                   ),
@@ -303,7 +304,8 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
                     child: Center(
                       child: Text(
                         'Details',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                   ),
@@ -311,7 +313,8 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
                     child: Center(
                       child: Text(
                         'Actions',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                   ),
@@ -371,16 +374,15 @@ class _ChallanTablePageState extends State<ChallanTablePage> {
             child: ElevatedButton(
               onPressed: () {
                 // Submit button logic here (e.g., send updated array)
-                print(
-                    'Updated Array Submitted ${widget.dataArray.length}');
+                print('Updated Array Submitted ${widget.dataArray.length}');
 
                 // Call a function or send data to FineTable.dart file
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                    // UserChallan(dataArray: widget.dataArray),
-                    CRUDEoperation(dataArray: widget.dataArray),
+                        // UserChallan(dataArray: widget.dataArray),
+                        CRUDEoperation(dataArray: widget.dataArray),
                   ),
                 );
               },

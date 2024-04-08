@@ -225,6 +225,7 @@ class _MyWidgetState extends State<CRUDEoperation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: isSearchClicked
@@ -309,9 +310,9 @@ class _MyWidgetState extends State<CRUDEoperation> {
                       ),
                       // subtitle: Text(documentSnapshot['vehno'].toString()),
                       subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start of the column
+                        crossAxisAlignment: CrossAxisAlignment
+                            .start, // Align text to the start of the column
                         children: [
-
                           Text(
                             documentSnapshot['veh-type'].toString(),
                             style: const TextStyle(
@@ -346,7 +347,8 @@ class _MyWidgetState extends State<CRUDEoperation> {
                                 icon: const Icon(Icons.edit)),
                             IconButton(
                                 color: Colors.black,
-                                onPressed: () => _delete(documentSnapshot.id),
+                                // onPressed: () => _delete(documentSnapshot.id),
+                                onPressed: () => {},
                                 icon: const Icon(Icons.delete)),
                           ],
                         ),
@@ -363,12 +365,12 @@ class _MyWidgetState extends State<CRUDEoperation> {
 
       // Create new project button
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _create(),
+        // onPressed: () => _create(),
+        onPressed: () => {},
         backgroundColor: Color.fromARGB(255, 38, 110, 192),
         // child: const Icon(Icons.add),
         child: Text("Send"),
       ),
-
     );
   }
 }

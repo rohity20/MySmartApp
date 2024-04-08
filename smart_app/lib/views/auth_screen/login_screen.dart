@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
           // applogoWidget(),
           meeshologoWidget(),
           10.heightBox,
-          "Log in to $appname".text.fontFamily(bold).pink500.size(18).make(),
+          "Log in to $appname".text.fontFamily(bold).white.size(18).make(),
           // "Log in to $appname".text.fontFamily(bold).white.size(18).make(),
           10.heightBox,
           Obx(() => Column(
@@ -49,10 +49,10 @@ class LoginScreen extends StatelessWidget {
                       5.heightBox,
                       controller.isloading.value
                           ? const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(redColor),
+                              valueColor: AlwaysStoppedAnimation(Colors.blue),
                             )
                           : ourButton(
-                              color: redColor,
+                              color: Colors.blue[400],
                               title: login,
                               textColor: whiteColor,
                               onPress: () async {
@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                                 await controller
                                     .loginMethod(context: context)
                                     .then((value) {
-                                  if (value == null) {
+                                  if (value != null) {
                                     VxToast.show(context, msg: loggedin);
                                     Get.offAll(() => const Home());
                                   } else {
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                       ourButton(
                           color: lightGrey,
                           title: signup,
-                          textColor: redColor,
+                          textColor: Colors.blue[400],
                           onPress: () {
                             Get.to(() => const SignupScreen());
                           }).box.width(context.screenWidth - 50).make(),

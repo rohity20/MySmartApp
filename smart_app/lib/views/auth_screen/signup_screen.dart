@@ -38,7 +38,7 @@ class _SignupScreenState extends State<SignupScreen> {
           // applogoWidget(),
           meeshologoWidget(),
           10.heightBox,
-          "Join the $appname".text.fontFamily(bold).pink500.size(18).make(),
+          "Join the $appname".text.fontFamily(bold).white.size(18).make(),
           //  "Join the $appname".text.fontFamily(bold).white.size(18).make(),
           10.heightBox,
           Obx(() => Column(
@@ -70,10 +70,10 @@ class _SignupScreenState extends State<SignupScreen> {
                       5.heightBox,
                       controller.isloading.value
                           ? const CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(redColor),
+                              valueColor: AlwaysStoppedAnimation(Colors.blue),
                             )
                           : ourButton(
-                              color: redColor,
+                              color: Colors.blue[400],
                               title: signup,
                               textColor: whiteColor,
                               onPress: () async {
@@ -115,8 +115,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             TextSpan(
                               text: login,
-                              style:
-                                  TextStyle(fontFamily: bold, color: redColor),
+                              style: TextStyle(
+                                  fontFamily: bold, color: Colors.blue),
                             )
                           ],
                         ),

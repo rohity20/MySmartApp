@@ -225,9 +225,9 @@ class _MyWidgetState extends State<ChallanHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        // backgroundColor: Colors.blue,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
         title: isSearchClicked
             ? Container(
                 height: 40,
@@ -245,7 +245,7 @@ class _MyWidgetState extends State<ChallanHistory> {
                       hintText: 'Search..'),
                 ),
               )
-            : const Text('Challan History..'),
+            : const Text('Challan History'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -275,6 +275,7 @@ class _MyWidgetState extends State<ChallanHistory> {
         // stream: _items.snapshots(),
         // stream: _items.where('vehno', whereIn: myarray).snapshots(),
         // stream: _items.snapshots(),
+
         stream: _challan.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {

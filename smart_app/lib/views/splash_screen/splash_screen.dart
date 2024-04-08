@@ -1,5 +1,7 @@
+import 'package:smart_app/MyHomePage.dart';
 import 'package:smart_app/consts/colors.dart';
 import 'package:smart_app/consts/consts.dart';
+import 'package:smart_app/main.dart';
 import 'package:smart_app/views/auth_screen/login_screen.dart';
 import 'package:smart_app/views/home_screen/home.dart';
 import 'package:smart_app/widgets_common/applogo_widget.dart';
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   //creating a method to change screen
 
   changeScreen() {
-    Future.delayed(const Duration(seconds: 6), () {
+    Future.delayed(const Duration(seconds: 10), () {
       //using getX
       // Get.to(() => const LoginScreen());
 
@@ -30,6 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.to(() => const LoginScreen());
         } else {
           Get.to(() => const Home());
+          // Get.to(() => MyHomePage());
         }
       });
     });

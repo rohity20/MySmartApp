@@ -7,7 +7,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: "Cart is Empty!"
+      child: "No Message!"
           .text
           .fontFamily(semibold)
           .color(darkFontGrey)

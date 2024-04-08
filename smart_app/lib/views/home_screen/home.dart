@@ -1,3 +1,5 @@
+import 'package:smart_app/ChallanHistory.dart';
+import 'package:smart_app/MyHomePage.dart';
 import 'package:smart_app/consts/consts.dart';
 import 'package:smart_app/controllers/home_controller.dart';
 import 'package:smart_app/views/cart_screen/cart_screen.dart';
@@ -25,8 +27,9 @@ class Home extends StatelessWidget {
     ];
 
     var navBody = [
-      const HomeScreen(),
-      const CategoryScreen(),
+      // const HomeScreen(),
+      MyHomePage(),
+      const ChallanHistory(),
       const CartScreen(),
       const ProfileScreen()
     ];
@@ -40,7 +43,7 @@ class Home extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
             currentIndex: controller.currentNavIndex.value,
-            selectedItemColor: redColor,
+            selectedItemColor: Colors.blue[400],
             selectedLabelStyle: const TextStyle(fontFamily: semibold),
             type: BottomNavigationBarType.fixed,
             backgroundColor: whiteColor,

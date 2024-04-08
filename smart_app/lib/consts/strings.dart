@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-const appname = "meesho";
-const appversion = "Version: 15.1 (474)";
+const appname = "Smart Traffic App";
+const appversion = "Version: 1.0.1";
 const credits = "@Rohit Yadav";
 const email = "Email";
 const emailHint = "admin@admin.com";
@@ -24,8 +24,8 @@ const loggedout = "Logged out successfully";
 
 //home string
 const home = "Home",
-    categories = "Categories",
-    cart = "Cart",
+    categories = "Challan",
+    cart = "Message",
     account = "Account";
 
 //home screen strings
@@ -52,9 +52,17 @@ const womenClothing = "Women Clothing",
     instruments = "Instruments";
 
 // profile strings
-const wishlist = "My Wishlist",
-    orders = "My Orders",
-    messages = "Messages",
-    payments = "My Payments",
-    share = "My Shared Products",
-    mycart = "My Cart";
+// const wishlist = "My Wishlist",
+//     orders = "My Orders",
+//     messages = "Messages",
+//     payments = "My Payments",
+//     share = "My Shared Products",
+//     mycart = "My Cart";
+
+const challan = "All Challans",
+    payment = "All Payments",
+    user = "Detected Users",
+    photo = "Uploaded Photos",
+    video = "Uploaded Videos",
+    message = "My Messages",
+    share = "Share Details";

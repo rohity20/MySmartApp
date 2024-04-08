@@ -6,9 +6,16 @@ import 'package:http/http.dart' as http;
 import 'package:smart_app/ChallanHistory.dart';
 import 'package:smart_app/ChallanTablePage.dart';
 import 'package:video_player/video_player.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:smart_app/crude_operation.dart';
+
+// ===================================
+import 'package:smart_app/views/splash_screen/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'consts/consts.dart';
+// ===================================
 
 // void main() {
 //   runApp(MyApp());
@@ -21,11 +28,33 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: HomePage(),
+//     );
+//   }
+// }
+
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
+    // we are using getX so we have to change this material app into getmaterialapp
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: appname,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+            //to set app bar icons color
+            iconTheme: IconThemeData(color: darkFontGrey),
+            backgroundColor: Colors.transparent),
+        fontFamily: regular,
+      ),
+      home: const SplashScreen(),
     );
   }
 }

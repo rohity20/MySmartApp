@@ -189,8 +189,12 @@ class _MyWidgetState extends State<CRUDEoperation> {
                       //       .update({"name": name, "number": number, "sn": sn});
 
                       if (number != null) {
-                        await _challan.add(
-                            {"name": name, "challan": number, "vehno": sn});
+                        await _challan.add({
+                          "name": name,
+                          "challan": number,
+                          "vehno": sn,
+                          "status": "Unpaid"
+                        });
 
                         _nameController.text = '';
                         _snController.text = '';

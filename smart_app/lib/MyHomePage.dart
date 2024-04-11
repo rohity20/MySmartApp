@@ -21,11 +21,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var message = [];
   final List<Map<String, dynamic>> mymessage = [
-    {
-      "url":
-          'https://firebasestorage.googleapis.com/v0/b/myocr-2c1cd.appspot.com/o/RJ14VJ1331.png?alt=media&token=fee21e38-746d-4700-8f0b-ccdbd02cca40',
-      "text": 'RJ14VJ1331'
-    }
+    // {
+    //   "url":
+    //       'https://firebasestorage.googleapis.com/v0/b/myocr-2c1cd.appspot.com/o/RJ14VJ1331.png?alt=media&token=fee21e38-746d-4700-8f0b-ccdbd02cca40',
+    //   "text": 'RJ14VJ1331'
+    // }
   ];
 
   late VideoPlayerController _videoPlayerController;
@@ -102,8 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final request = http.MultipartRequest(
         "POST",
-        Uri.parse(
-            "https://5653-2409-4080-121b-e953-1488-b82b-6f10-90e4.ngrok-free.app/process_images"),
+        Uri.parse("https://4019-103-230-149-57.ngrok-free.app/process_images"),
       );
 
       final headers = {"Content-type": "multipart/form-data"};
@@ -182,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final request = http.MultipartRequest(
         "POST",
         Uri.parse(
-            "https://5653-2409-4080-121b-e953-1488-b82b-6f10-90e4.ngrok-free.app/upload_videos"), // Update URL
+            "https://4019-103-230-149-57.ngrok-free.app/upload_videos"), // Update URL
       );
 
       final headers = {"Content-type": "multipart/form-data"};
@@ -284,15 +283,30 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: uploadImages,
               icon: Icon(Icons.upload_file, color: Colors.white),
               label: Text(
-                "Upload",
+                "Upload Images",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+
+            TextButton.icon(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              ),
+              // onPressed: imgvid==1?uploadImages: uploadVideos,
+              onPressed: uploadVideos,
+              icon: Icon(Icons.upload_file, color: Colors.white),
+              label: Text(
+                "Upload Videos",
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
             ),
             SizedBox(height: 20),
-            // Text("Total Detections: ${mymessage.length}\n"),
-            Text("Total Detections: 0\n"),
+            Text("Total Detections: ${mymessage.length}\n"),
+            // Text("Total Detections: 0\n"),
             TextButton.icon(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.blue),

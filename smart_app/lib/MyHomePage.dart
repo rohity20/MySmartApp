@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final request = http.MultipartRequest(
         "POST",
-        Uri.parse("https://4019-103-230-149-57.ngrok-free.app/process_images"),
+        Uri.parse("https://ad3e-103-230-149-57.ngrok-free.app/process_images"),
       );
 
       final headers = {"Content-type": "multipart/form-data"};
@@ -181,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final request = http.MultipartRequest(
         "POST",
         Uri.parse(
-            "https://4019-103-230-149-57.ngrok-free.app/upload_videos"), // Update URL
+            "https://ad3e-103-230-149-57.ngrok-free.app/process_videos"), // Update URL
       );
 
       final headers = {"Content-type": "multipart/form-data"};
